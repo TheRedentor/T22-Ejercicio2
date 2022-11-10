@@ -1,4 +1,4 @@
-package conection;
+package connection;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -62,8 +62,7 @@ public class Conexion {
 				String Query = "CREATE DATABASE " + name;
 				Statement st = connect.createStatement();
 				st.executeUpdate(Query);
-				//MySQLConnection();
-				JOptionPane.showMessageDialog(null," Created database " + name + "successfully ");
+				JOptionPane.showMessageDialog(null,"Base de datos " + name + " creada correctamente.");
 			} catch (SQLException ex) {
 			}
 		}
@@ -78,7 +77,7 @@ public class Conexion {
 			
 			Statement st = connect.createStatement();
 			st.executeUpdate(query);
-			System.out.println("Table created");
+			JOptionPane.showMessageDialog(null, "Tabla creada correctamente");
 			
 		}catch (SQLException sqlException) {
 		}
