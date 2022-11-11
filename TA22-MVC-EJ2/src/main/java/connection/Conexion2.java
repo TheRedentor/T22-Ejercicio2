@@ -1,23 +1,27 @@
-package conection;
+package connection;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
+
 import javax.swing.JOptionPane;
+
 import com.sun.istack.internal.logging.Logger;
-import java.sql.DriverManager;
+
+public class Conexion2 {
 	
-public class Conexion {
-		
-	private Connection connect;
+private Connection connect;
 	
-	public Conexion() {
+	public Conexion2() {
 	}
+	
 	
 	private String[] readDataFile() throws FileNotFoundException {
         String[] text= new String[3];
@@ -62,8 +66,7 @@ public class Conexion {
 				String Query = "CREATE DATABASE " + name;
 				Statement st = connect.createStatement();
 				st.executeUpdate(Query);
-				//MySQLConnection();
-				JOptionPane.showMessageDialog(null," Created database " + name + "successfully ");
+				JOptionPane.showMessageDialog(null,"Base de datos " + name + " creada correctamente.");
 			} catch (SQLException ex) {
 			}
 		}
@@ -78,7 +81,7 @@ public class Conexion {
 			
 			Statement st = connect.createStatement();
 			st.executeUpdate(query);
-			System.out.println("Table created");
+			JOptionPane.showMessageDialog(null, "Tabla creada correctamente");
 			
 		}catch (SQLException sqlException) {
 		}
@@ -94,28 +97,26 @@ public class Conexion {
 				Statement st = connect.createStatement();
 				st.executeUpdate(query);
 				
-				JOptionPane.showMessageDialog(null, "Usuario creado correctamente");
+				JOptionPane.showMessageDialog(null, "Vídeo creado correctamente");
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Error al crear el usuario.");
+				JOptionPane.showMessageDialog(null, "Error al crear el video.");
 
 			}
 			
 		}
 		
-		public void updateData(String db, String table_name, String modif_columna, String campo_cambiado, String condicion) throws SQLException {
+		public void updateData(String db, String table_name, String modif_columna, String campo_cambiado, int condicion) throws SQLException {
 		    try {
 	            String Queryd = "USE "+db+";";
 	            Statement stdb = connect.createStatement();
 	            stdb.executeUpdate(Queryd);
 
 	            String Query = "UPDATE "+table_name+" SET "+ modif_columna +" = '"+campo_cambiado+"' WHERE id = "+condicion;
-	            System.out.println(Query);
 	            Statement st = connect.createStatement();
 	            st.executeUpdate(Query);
-	            JOptionPane.showMessageDialog(null, "Usuario modificado con éxito.");
 	        } catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
-	            JOptionPane.showMessageDialog(null, "Error al modificar el usuario especificado.");
+	            JOptionPane.showMessageDialog(null, "Error al modificar el vídeo especificado.");
 	        }
 		}
 		
@@ -128,10 +129,10 @@ public class Conexion {
 		            String Query = "DELETE FROM "+table_name+" WHERE "+primaryKey+" = "+ID;
 		            Statement st = connect.createStatement();
 		            st.executeUpdate(Query);
-		            JOptionPane.showMessageDialog(null, "Usuario borrado con éxito.");
+		            JOptionPane.showMessageDialog(null, "Vídeo borrado con éxito.");
 		        } catch (SQLException ex) {
 		            System.out.println(ex.getMessage());
-		            JOptionPane.showMessageDialog(null, "Error al borrar el usuario especificado, compruebe su ID.");
+		            JOptionPane.showMessageDialog(null, "Error al borrar el vídeo especificado, compruebe su ID.");
 		        }
 		}
 		
@@ -149,12 +150,9 @@ public class Conexion {
 	            java.sql.ResultSet resultSet;
 	            resultSet = st.executeQuery(Query);
 	            while (resultSet.next()) {
-	                text.add("ID: "+ resultSet.getString("id")+" "
-	                		+ "Nombre: "+ resultSet.getString("nombre")+" "
-	                		+ "Apellido: "+ resultSet.getString("apellido")+" "
-	                		+ "Dirección: "+ resultSet.getString("direccion")+" "
-	                		+ "DNI: "+ resultSet.getString("dni")+" "
-	                        + "Fecha: "+ resultSet.getString("fecha"));
+	                text.add("-------------\nID: "+ resultSet.getString("id")+"\n"
+	                		+ "Título: "+ resultSet.getString("title")+"\n"
+	                        + "Director: "+ resultSet.getString("director")+"\n-------------");
 	            }
 
 	        } catch (SQLException ex) {
