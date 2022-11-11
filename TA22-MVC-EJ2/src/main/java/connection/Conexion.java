@@ -108,10 +108,8 @@ public class Conexion {
 	            stdb.executeUpdate(Queryd);
 
 	            String Query = "UPDATE "+table_name+" SET "+ modif_columna +" = '"+campo_cambiado+"' WHERE id = "+condicion;
-	            System.out.println(Query);
 	            Statement st = connect.createStatement();
 	            st.executeUpdate(Query);
-	            JOptionPane.showMessageDialog(null, "Usuario modificado con éxito.");
 	        } catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
 	            JOptionPane.showMessageDialog(null, "Error al modificar el usuario especificado.");
@@ -148,12 +146,12 @@ public class Conexion {
 	            java.sql.ResultSet resultSet;
 	            resultSet = st.executeQuery(Query);
 	            while (resultSet.next()) {
-	                text.add("ID: "+ resultSet.getString("id")+" "
-	                		+ "Nombre: "+ resultSet.getString("nombre")+" "
-	                		+ "Apellido: "+ resultSet.getString("apellido")+" "
-	                		+ "Dirección: "+ resultSet.getString("direccion")+" "
-	                		+ "DNI: "+ resultSet.getString("dni")+" "
-	                        + "Fecha: "+ resultSet.getString("fecha"));
+	                text.add("-------------\nID: "+ resultSet.getString("id")+"\n"
+	                		+ "Nombre: "+ resultSet.getString("nombre")+"\n"
+	                		+ "Apellido: "+ resultSet.getString("apellido")+"\n"
+	                		+ "Dirección: "+ resultSet.getString("direccion")+"\n"
+	                		+ "DNI: "+ resultSet.getString("dni")+"\n"
+	                        + "Fecha: "+ resultSet.getString("fecha")+"\n-------------");
 	            }
 
 	        } catch (SQLException ex) {

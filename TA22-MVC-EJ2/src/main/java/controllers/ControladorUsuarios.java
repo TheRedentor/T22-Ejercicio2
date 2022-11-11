@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import models.ModeloUsuario;
@@ -21,6 +22,9 @@ public class ControladorUsuarios implements ActionListener {
 	public ControladorUsuarios(ModeloUsuario modeloUsuario, Vista vista) {
 			this.modeloUsuario=modeloUsuario;
 			this.vista=vista;
+			this.vista.btn_menu_usuarios.addActionListener(this);
+			this.vista.btn_menu_videos.addActionListener(this);
+			this.vista.boton_create.addActionListener(this);
 			this.vista.boton_create.addActionListener(this);
 			this.vista.boton_delete.addActionListener(this);
 			this.vista.boton_read.addActionListener(this);
@@ -28,33 +32,12 @@ public class ControladorUsuarios implements ActionListener {
 			this.vista.boton_borrar.addActionListener(this);
 			this.vista.boton_guardar.addActionListener(this);
 			this.vista.boton_guardar1.addActionListener(this);
+			this.vista.btn_volver_usuario.addActionListener(this);
+			
 		}
 
 	
 	public void actionPerformed(ActionEvent evento) {
-		if(vista.btn_menu_videos == evento.getSource()) {
-			try {
-				vista.textArea.setText(null);
-				
-				vista.vista_menu.setVisible(false);
-				
-				vista.vista_el_gen_usuarios.setVisible(true);
-				vista.vista_el_gen_videos.setVisible(false);
-				
-				vista.vista_create_video.setVisible(false);
-				vista.vista_read_video.setVisible(false);
-				vista.vista_update_video.setVisible(false);
-				vista.vista_eliminar_video.setVisible(false);	
-				
-				vista.vista_create_usuarios.setVisible(true);
-				vista.vista_delete_usuarios.setVisible(false);
-				vista.vista_update_usuarios.setVisible(false);
-				vista.vista_read_usuarios.setVisible(false);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			
-		}
 		if(vista.btn_menu_usuarios == evento.getSource()) {
 			try {
 				vista.textArea.setText(null);
@@ -64,12 +47,7 @@ public class ControladorUsuarios implements ActionListener {
 				vista.vista_el_gen_usuarios.setVisible(true);
 				vista.vista_el_gen_videos.setVisible(false);
 				
-				vista.vista_create_video.setVisible(false);
-				vista.vista_read_video.setVisible(false);
-				vista.vista_update_video.setVisible(false);
-				vista.vista_eliminar_video.setVisible(false);	
-				
-				vista.vista_create_usuarios.setVisible(true);
+				vista.vista_create_usuarios.setVisible(false);
 				vista.vista_delete_usuarios.setVisible(false);
 				vista.vista_update_usuarios.setVisible(false);
 				vista.vista_read_usuarios.setVisible(false);
@@ -78,6 +56,32 @@ public class ControladorUsuarios implements ActionListener {
 			}
 			
 		}
+		
+		if(vista.btn_volver_usuario == evento.getSource()) {
+			try {
+				vista.textArea.setText(null);
+				
+				vista.vista_menu.setVisible(true);
+
+				vista.vista_el_gen_usuarios.setVisible(false);
+				vista.vista_el_gen_videos.setVisible(false);
+				
+				vista.vista_create_video.setVisible(false);
+				vista.vista_read_video.setVisible(false);
+				vista.vista_update_video.setVisible(false);
+				vista.vista_eliminar_video.setVisible(false);	;
+				
+				vista.vista_create_usuarios.setVisible(false);
+				vista.vista_delete_usuarios.setVisible(false);
+				vista.vista_update_usuarios.setVisible(false);
+				vista.vista_read_usuarios.setVisible(false);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			
+		}
+		
+		
 		if(vista.boton_create == evento.getSource()) {
 			try {
 				vista.textArea.setText(null);
@@ -92,11 +96,6 @@ public class ControladorUsuarios implements ActionListener {
 
 				vista.vista_el_gen_usuarios.setVisible(true);
 				vista.vista_el_gen_videos.setVisible(false);
-				
-				vista.vista_create_video.setVisible(false);
-				vista.vista_read_video.setVisible(false);
-				vista.vista_update_video.setVisible(false);
-				vista.vista_eliminar_video.setVisible(false);	
 				
 				vista.vista_create_usuarios.setVisible(true);
 				vista.vista_delete_usuarios.setVisible(false);
@@ -116,11 +115,7 @@ public class ControladorUsuarios implements ActionListener {
 
 				vista.vista_el_gen_usuarios.setVisible(true);
 				vista.vista_el_gen_videos.setVisible(false);
-				
-				vista.vista_create_video.setVisible(false);
-				vista.vista_read_video.setVisible(false);
-				vista.vista_update_video.setVisible(false);
-				vista.vista_eliminar_video.setVisible(false);	
+
 				
 				vista.vista_create_usuarios.setVisible(false);
 				vista.vista_delete_usuarios.setVisible(true);
@@ -147,12 +142,7 @@ public class ControladorUsuarios implements ActionListener {
 				
 				vista.vista_el_gen_usuarios.setVisible(true);
 				vista.vista_el_gen_videos.setVisible(false);
-				
-				vista.vista_create_video.setVisible(false);
-				vista.vista_read_video.setVisible(false);
-				vista.vista_update_video.setVisible(false);
-				vista.vista_eliminar_video.setVisible(false);	
-				
+						
 				vista.vista_create_usuarios.setVisible(false);
 				vista.vista_delete_usuarios.setVisible(false);
 				vista.vista_update_usuarios.setVisible(true);
@@ -170,11 +160,6 @@ public class ControladorUsuarios implements ActionListener {
 
 				vista.vista_el_gen_usuarios.setVisible(true);
 				vista.vista_el_gen_videos.setVisible(false);
-				
-				vista.vista_create_video.setVisible(false);
-				vista.vista_read_video.setVisible(false);
-				vista.vista_update_video.setVisible(false);
-				vista.vista_eliminar_video.setVisible(false);	
 				
 				vista.vista_create_usuarios.setVisible(false);
 				vista.vista_delete_usuarios.setVisible(false);
@@ -225,6 +210,7 @@ public class ControladorUsuarios implements ActionListener {
 				this.modeloUsuario.update("direccion",direccion,id);
 				this.modeloUsuario.update("dni", String.valueOf(dni),id);
 				this.modeloUsuario.update("fecha",fecha,id);
+				JOptionPane.showMessageDialog(null, "Usuario modificado correctamente.");
 			} catch (FileNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}

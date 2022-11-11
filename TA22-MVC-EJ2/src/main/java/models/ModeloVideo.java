@@ -60,20 +60,20 @@ public class ModeloVideo {
 	
 	public ArrayList<String> read() throws SQLException, FileNotFoundException {
 		conexion.create_connection();
-		ArrayList<String> text = conexion.readData("T22_2","Clientes");
+		ArrayList<String> text = conexion.readData("T22_2","Videos");
 		conexion.closeConnection();
 		return text;
 	}
 	
 	public void update(String campo, String campo_cambiado, int condicion) throws FileNotFoundException, SQLException {
 		conexion.create_connection();
-		conexion.updateData("T22_2","Clientes",campo,campo_cambiado,condicion);
+		conexion.updateData("T22_2","Videos",campo,campo_cambiado,condicion);
 		conexion.closeConnection();
 	}
 	
 	public void delete(int id, String primarykey) throws FileNotFoundException, SQLException {
 		conexion.create_connection();
-		conexion.deleteData("T22_2","Clientes", primarykey, id);
+		conexion.deleteData("T22_2","Videos", primarykey, id);
 		conexion.closeConnection();
 	}
 	
